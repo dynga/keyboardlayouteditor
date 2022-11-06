@@ -194,7 +194,7 @@ class DumbKey(gtk.DrawingArea):
             self.context.move_to(cx + cwidth/2 - width/2 - xbearing, 
                                  cy + cheight/2 - height/2 - ybearing)
         else:
-            print "Error; unknown alignment"
+            print("Error; unknown alignment")
             sys.exit(-1)
 
         self.context.set_source_rgb(.30, .30, .30)

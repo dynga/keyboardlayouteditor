@@ -76,12 +76,12 @@ def download_file(url):
                 print "Downloading ", url, "..."
                 try:
                         urllib.urlretrieve(url, localfilename, download_hook)
-                except IOError, (errno, strerror):
+                except IOError as (errno, strerror):
                         print "I/O errorxx(%s): %s" % (errno, strerror)
                         sys.exit(-1)
                 except:
-                        print "Unexpected error: ", sys.exc_info()[0]
-                        sys.exit(-1)
+                        print("Unexpected error: ", sys.exc_info()[0])
+						sys.exit(-1)
                 print " done."
         else:
                 if opt_verbose:
@@ -93,11 +93,11 @@ def download_hook(blocks_transferred, block_size, file_size):
         if blocks_transferred == 0:
                 if file_size > 0:
                         if opt_verbose:
-                                print "Downloading", file_size, "bytes: ",
-                else:
+							print("Downloading", file_size, "bytes: ", end=' ')
+				else:
                         if opt_verbose:
-                                print "Downloading: ",
-        sys.stdout.write('#')
+							print("Downloading: ", end=' ')
+		sys.stdout.write('#')
         sys.stdout.flush()
 
 
@@ -107,12 +107,12 @@ def process_keysymstxt():
         filename_keysymstxt = download_file(URL_KEYSYMSTXT)
         try:
                 keysymstxt = open(filename_keysymstxt, 'r')
-        except IOError, (errno, strerror):
-                print "I/O errorxx(%s): %s" % (errno, strerror)
-                sys.exit(-1)
+        except IOError as (errno, strerror):
+                print("I/O errorxx(%s): %s" % (errno, strerror))
+				sys.exit(-1)
         except:
-                print "Unexpected error: ", sys.exc_info()[0]
-                sys.exit(-1)
+                print("Unexpected error: ", sys.exc_info()[0])
+				sys.exit(-1)
 
         """ Parse the keysyms.txt file and place content in  keysymdb """
         linenum_keysymstxt = 0

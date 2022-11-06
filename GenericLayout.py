@@ -186,4 +186,4 @@ class GenericLayout:
     
 if __name__ == "__main__":
     gl = GenericLayout()
-    print gl.tostring()
+    print(gl.tostring())

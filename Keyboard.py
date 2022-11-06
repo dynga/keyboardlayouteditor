@@ -48,11 +48,11 @@ class Keyboard(gtk.Frame):
         # Fill in the KeyDict structure with xml branches
         for key in KeyDict.Keys.keys():
             if self.xmllayout.exists_tokenkey(key):
-                print "Key", key, "already exists in xmllayout."
+                print("Key", key, "already exists in xmllayout.")
                 if KeyDict.Keys[key].xmlbranch == None:
-                    print "Key", key, "was not set, setting now"
+                    print("Key", key, "was not set, setting now")
                 elif KeyDict.Keys[key].xmlbranch != xmllayout.return_tokenkey(key):
-                    print "Key", key, "already set to something..."
+                    print("Key", key, "already set to something...")
                 else:
                     KeyDict.Keys[key].xmlbranch = xmllayout.create_tokenkey(key)
             elif self.xmllayout.create_tokenkey(key) != None:
@@ -150,7 +150,7 @@ class Keyboard(gtk.Frame):
         return False
     
     def receiveCallback(widget, context, x, y, selection, targetType, time):
-        print "Keyboard: Received a callback for", selection, "at", x, y, "at", time
+        print("Keyboard: Received a callback for", selection, "at", x, y, "at", time)
 
     def redraw(self):
         for keycode in KeyDict.Keys.keys():
@@ -160,7 +160,7 @@ class Keyboard(gtk.Frame):
     def save(self, layout_file):
         try:
             fout = open(layout_file, "w")
-        except IOError, e:
+        except IOError as e:
             return False
 
         self.gl_layout = GenericLayout.GenericLayout()

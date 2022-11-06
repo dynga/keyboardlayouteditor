@@ -53,4 +53,4 @@ DeadKeys = DeadKeysClass()
 
 if __name__ == "__main__":
     for k in DeadKeys.dict.keys():
-        print k, DeadKeys.dict[k]
+        print(k, DeadKeys.dict[k])

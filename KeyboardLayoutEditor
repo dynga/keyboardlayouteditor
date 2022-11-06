@@ -30,31 +30,31 @@ try:
     import gtk
     import gobject
     import pango
-except ImportError, e:
+except ImportError as e:
     raise SystemExit("Import error, Keyboard Layout Editor: " + str(e))
 
 if gtk.pygtk_version < (2, 12):
-    print "PyGtk 2.12 or later required for this application"
-    print "You have pyGTK", gtk.pygtk_version
+    print("PyGtk 2.12 or later required for this application")
+    print("You have pyGTK", gtk.pygtk_version)
     raise SystemExit
 
 try:
     import cairo
-except ImportError, e:
+except ImportError as e:
     raise SystemExit("The Python bindings for Cairo are required \
                         for this application: " + str(e))
 
 try:
     from lxml import etree
-except ImportError, e:
+except ImportError as e:
     raise SystemExit("The Python bindings for libxml2 were not found: " + str(e))
 
 try:
     import antlr3
-except ImportError, err:
-    print 'Import error:', err
-    print 'This script requires to have the python antl3 package installed.'
-    print 'Please see the README file for further instructions.\nExiting...'
+except ImportError as err:
+    print('Import error:', err)
+    print('This script requires to have the python antl3 package installed.')
+    print('Please see the README file for further instructions.\nExiting...')
     sys.exit(-10)
 
 try:
@@ -68,7 +68,7 @@ try:
     from KeyDict import KeyDict, included_files, activated_variants
     from ParseXML import ExtractVariantsKeycodes
     from DeadKeysDict import DeadKeys
-except ImportError, e:
+except ImportError as e:
     raise SystemExit("Import error, Keyboard Layout Editor: " + str(e))
 
 class Controller_KeyboardLayoutEditor:
@@ -804,7 +804,7 @@ Please do not put punctuation marks."
 
         if activated_variants.has_key(selected_layout):
             del activated_variants[selected_layout]
-        print "clicked_removeentry_callback:", included_files
+        print("clicked_removeentry_callback:", included_files)
         del included_files[selected_layout]
         del self.include_layout_selected["model"][self.include_layout_selected["paths"][0]]
         self.mykeyboard.redraw()

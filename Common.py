@@ -98,7 +98,7 @@ def parseIncludeString(include):
         return { 'filename': include.partition('(')[0], 'variant': '' }
 
 if __name__ == '__main__':
-    print parseIncludeString('us')
-    print parseIncludeString('us(level1)')
+    print(parseIncludeString('us'))
+    print(parseIncludeString('us(level1)'))
     
     

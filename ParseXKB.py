@@ -23,12 +23,12 @@ import copy
 from lxml import etree
 
 try: 
-	from XKBGrammarLexer import XKBGrammarLexer 
-	from XKBGrammarParser import XKBGrammarParser
-	from XKBGrammarWalker import XKBGrammarWalker, LAYOUT, SYMBOLS, MAPMATERIAL, MAPTYPE, MAPOPTIONS, MAPOPTS, MAPNAME, TOKEN_INCLUDE, TOKEN_NAME, TOKEN_KEY_TYPE, TOKEN_KEY, TOKEN_TYPE, TOKEN_MODIFIER_MAP, TOKEN_VIRTUAL_MODIFIERS, KEYCODE, KEYCODEX, ELEM_KEYSYMS, ELEM_KEYSYMGROUP, ELEM_VIRTUALMODS, OVERLAY, VALUE, STATE, NAME, DQSTRING, OVERRIDE
-except ImportError, e:
+    from XKBGrammarLexer import XKBGrammarLexer
+    from XKBGrammarParser import XKBGrammarParser
+    from XKBGrammarWalker import XKBGrammarWalker, LAYOUT, SYMBOLS, MAPMATERIAL, MAPTYPE, MAPOPTIONS, MAPOPTS, MAPNAME, TOKEN_INCLUDE, TOKEN_NAME, TOKEN_KEY_TYPE, TOKEN_KEY, TOKEN_TYPE, TOKEN_MODIFIER_MAP, TOKEN_VIRTUAL_MODIFIERS, KEYCODE, KEYCODEX, ELEM_KEYSYMS, ELEM_KEYSYMGROUP, ELEM_VIRTUALMODS, OVERLAY, VALUE, STATE, NAME, DQSTRING, OVERRIDE
+except ImportError as e:
     raise SystemExit("A generated source file by ANTLR was not found.\nSee the README on how to generate.\nImport error: " + str(e))
-	
+
 import KeycodesReader
 import KeysymsUni
 
@@ -123,9 +123,9 @@ class ParseXKB:
                                 eMapName = etree.SubElement(eSymbol, 'mapname')
                                 eMapName.text = maptypesect.getChildren()[0].getText()[1:-1]
                             else:
-                                print "\t\t\tInternal error in mapoption"
+                                print("\t\t\tInternal error in mapoption")
                         else:
-                            print "\t\tInternal error in maptypesect"
+                            print("\t\tInternal error in maptypesect")
                             sys.exit(-2)
                 elif mapobject.getType() == MAPMATERIAL:
                     eMapMaterial = etree.SubElement(eSymbol, 'mapmaterial')
@@ -147,7 +147,7 @@ class ParseXKB:
                             elif modstate.getType() == KEYCODEX:
                                 eModState = etree.SubElement(eModMap, "keycodex", value=modstate.getChild(0).getText())
                             else:
-                                print "Unexpected token encountered. Aborting...", modstate.getText()
+                                print("Unexpected token encountered. Aborting...", modstate.getText())
                                 sys.exit(-1)
                     allkeysymgroups = {}
                     for keyset in self.getChildrenByType(mapobject, TOKEN_KEY):
@@ -164,7 +164,7 @@ class ParseXKB:
                         if len(keycodex) == 1:
                             eKeyCodeName.text = keycodex[0].getChild(0).getText()
                         else:
-                            print "Could not retrieve keycode name"
+                            print("Could not retrieve keycode name")
                             exit(-1)
                         if len(override) == 1:
                             eTokenKey.attrib['override'] = "True"
@@ -197,7 +197,7 @@ class ParseXKB:
                                 for elem2 in self.getChildrenByType(elem, KEYCODEX):
                                     pass
                 else:
-                    print "\tInternal error at map level,", mapobject.getText()
+                    print("\tInternal error at map level,", mapobject.getText())
                     # sys.exit(-2)
                     
         return layout
@@ -266,7 +266,7 @@ class ParseXKB:
                         try:
                             allkeysymgroups[keyset.getChild(0).getChild(0).getText()] = keyset
                         except AttributeError:
-                            print "Error setting keyset:", keyset
+                            print("Error setting keyset:", keyset)
                     sortedkeysymgroups = self.sortDict(allkeysymgroups, KeycodesReader.compare_keycode)
                     for keyset in sortedkeysymgroups:
                         elem_keysymgroup = self.getChildrenByType(keyset, ELEM_KEYSYMGROUP)
@@ -510,9 +510,9 @@ if __name__ == '__main__':
 
     store_keydict = {}
     px.parse_layout_controller(store_keydict, '/usr/share/X11/xkb/symbols/gr', 'polytonic')
-    print "About to print"
+    print("About to print")
     for k in store_keydict.keys():
-        print k,
+        print(k, end=' ')
         for i in store_keydict[k].keys():
-            print store_keydict[k][i].getValue(),
+            print(store_keydict[k][i].getValue(), end=' ')
         print

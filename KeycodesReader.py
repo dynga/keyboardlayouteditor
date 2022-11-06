@@ -46,7 +46,7 @@ def parseFile(fileandvariant = "/usr/share/X11/xkb/keycodes/xfree86|xfree86", *m
         try:    
             file = open(filename, 'r')
         except OSError:
-            print "Could not open file ", filename, " Aborting..."
+            print("Could not open file ", filename, " Aborting...")
             sys.exit(-1)
         file.close
     
@@ -69,10 +69,10 @@ def parseFile(fileandvariant = "/usr/share/X11/xkb/keycodes/xfree86|xfree86", *m
             listType = getChildrenListByType(itemKeycodeDoc, KEYCODELISTTYPE)
             material = getChildrenListByType(itemKeycodeDoc, KEYCODEMATERIAL)
             if len(listType) != 1:
-                print "Requires single node for KEYCODELISTTYPE. Found", len(listType)
+                print("Requires single node for KEYCODELISTTYPE. Found", len(listType))
                 sys.exit(-1)
             if len(material) != 1:
-                print "Requires single node for KEYCODEMATERIAL. Found", len(material)
+                print("Requires single node for KEYCODEMATERIAL. Found", len(material))
                 sys.exit(-1)
                     
             for listNameGroup in getChildrenListByType(listType[0], KEYCODELISTNAME):
